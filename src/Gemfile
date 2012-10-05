@@ -24,6 +24,7 @@ gem 'compass'
 gem 'compass-960-plugin', :require=> 'ninesixty'
 gem 'delayed_job', '~> 2.1.4'
 gem 'paranoia'
+gem 'tim', :git => 'git://github.com/aeolus-incubator/tim.git'
 
 platforms :ruby_18 do
   gem 'fastercsv'
