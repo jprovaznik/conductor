@@ -18,6 +18,9 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+Bundler.require
+require "tim"
+
 if  File.exist?(File.expand_path('../../Gemfile.in', __FILE__))
   require File.join(File.dirname(__FILE__), '..', 'lib', 'aeolus', 'ext')
   puts 'Using gem require instead of bundler'
