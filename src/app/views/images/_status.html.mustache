@@ -38,9 +38,6 @@
               <%= t('images.show.provider') %>
             </th>
             <th>
-              <%= t('images.show.image_uuid') %>
-            </th>
-            <th>
               <%= t('images.show.providers_image_id') %>
             </th>
             <th class="image_controls"></th>
@@ -58,9 +55,6 @@
                   </td>
                   <td class="light">
                     {{provider_image.target_identifier}}
-                  </td>
-                  <td class="light">
-                    {{provider_image.uuid}}
                   </td>
                   <td class="image_controls light">
                       {{#push_status.is_active_push}}

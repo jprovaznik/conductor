@@ -5,6 +5,7 @@
   = hidden_field :deployment, :frontend_realm_id
   = hidden_field_tag :launch_parameters_encoded, @launch_parameters_encoded
   = hidden_field_tag :deployable_id, params[:deployable_id]
+  = hidden_field_tag :backlink, @backlink
 
   %header.page-header
     %h1.pools= t('.pool_name', :pool => @pool.name)
@@ -59,7 +60,7 @@
                 %li.image-id= assembly.image_id
       %fieldset.options.align-center
         = link_to t(:cancel), pool_path(@pool), :class => 'button danger', :id => 'cancel_deployment_button'
-        = submit_tag t(:back), :class => 'button', :value => 'back'
+        = submit_tag t(:back), :class => 'button'
         = submit_tag t('.launch'), :id => 'launch_deployment_button', :disabled => (@errors && @errors.any?)
 -# Quota checking to go here as well, once I understand how it works with new code
 

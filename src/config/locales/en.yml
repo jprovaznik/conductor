@@ -106,6 +106,7 @@ en:
       name_starts_with_B: "Name starts with B"
     errors:
       has_running_instances: '%{username} has running instances'
+      cannot_edit_ldap_user: Cannot edit LDAP user
   user_groups:
     groups: "User Groups"
     local: Local
@@ -362,6 +363,10 @@ en:
     properties:
       property_name: Property Name
       value: Value
+      name: Name
+      created: Created
+      pool: Pool
+      owner: Owner
       global_uptime: Global Uptime
       uptime_1st_instance: Uptime 1st Instance running
     provider_services:
@@ -930,7 +935,7 @@ en:
         delete_failed: Unable to Delete Target Image
         not_found: Target Image not found
   images:
-    environment: "Environment: %{environment}"
+    environment: Environment
     environment_header: Environment
     import:
       import_image: Import Image
@@ -953,6 +958,7 @@ en:
     show:
       provider_images: Provider Images
       provider_account: Provider Account
+      image_id: Image ID
       image_uuid: Image UUID
       push: Push
       upload: Upload
@@ -1144,10 +1150,10 @@ en:
   settings:
     settings: Settings
     index:
-      permissions: Permissions
-      permissions_desc: Modify self-service default quota.
+      permissions: User defaults
+      permissions_desc: Modify default user settings
     self_service:
-      self_service_default: 'User Treatment: Self-service default'
+      self_service_default: 'Default user settings'
       account: Account
       instances_quota: "Instances Quota:"
       self_service_settings: "Self-service Settings"

@@ -222,6 +222,7 @@ class Deployment < ActiveRecord::Base
       # is not sufficient because restore then doesn't work if
       # you have some nested save operations inside the transaction
       transaction do
+        save!
         create_instances_with_params!(permission_session, user)
         launch!(user)
       end

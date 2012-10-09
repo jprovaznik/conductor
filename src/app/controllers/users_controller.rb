@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     require_privilege(Privilege::CREATE, User)
     @title = t'users.new.new_user'
     @user = User.new
-    @user.quota = Quota.new
+    @user.quota = Quota.new_for_user
   end
 
   def create
@@ -97,6 +97,7 @@ class UsersController < ApplicationController
     @user = params[:id] ? User.find(params[:id]) : current_user
     require_privilege(Privilege::MODIFY, User) unless @user == current_user
     @title = t'users.edit.edit_user'
+    @ldap_user = (SETTINGS_CONFIG[:auth][:strategy] == "ldap")
   end
 
   def update

@@ -77,6 +77,8 @@ class User < ActiveRecord::Base
   before_validation :strip_whitespace
   after_save :update_entity
 
+  validate :validate_ldap_changes, :if => Proc.new {|user|
+    !user.new_record? && SETTINGS_CONFIG[:auth][:strategy] == "ldap"}
   validates_presence_of :quota
   validates_length_of :first_name, :maximum => 255, :allow_blank => true
   validates_length_of :last_name,  :maximum => 255, :allow_blank => true
@@ -185,16 +187,23 @@ class User < ActiveRecord::Base
     end
   end
 
+  def validate_ldap_changes
+    if self.first_name_changed? || self.last_name_changed? || self.email_changed? ||
+        self.username_changed? || self.crypted_password_changed? then
+      errors.add(:base, I18n.t("users.errors.cannot_edit_ldap_user"))
+    end
+  end
+
   def encrypt_password
     self.crypted_password = Password::update(password) unless password.blank?
   end
 
   def self.create_ldap_user!(username)
-    User.create!(:username => username, :quota => Quota.new, :ignore_password => true)
+    User.create!(:username => username, :quota => Quota.new_for_user, :ignore_password => true)
   end
 
   def self.create_krb_user!(username)
-    User.create!(:username => username, :quota => Quota.new, :ignore_password => true)
+    User.create!(:username => username, :quota => Quota.new_for_user, :ignore_password => true)
   end
 
   def ensure_not_running_any_instances

@@ -34,7 +34,7 @@
 
 class Quota < ActiveRecord::Base
 
-  set_table_name "quotas"
+  self.table_name = "quotas"
 
   has_one :pool
   has_one :pool_family
@@ -156,5 +156,11 @@ class Quota < ActiveRecord::Base
       return true
     end
     return false
+  end
+
+  def self.new_for_user
+    self.new(:maximum_running_instances =>
+             MetadataObject.lookup("self_service_default_quota").
+             maximum_running_instances)
   end
 end
