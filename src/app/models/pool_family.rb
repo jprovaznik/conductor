@@ -55,6 +55,7 @@ class PoolFamily < ActiveRecord::Base
   has_many :deployables
   has_many :instances
   has_many :deployments
+  has_many :base_images
 
   validates_length_of :name, :maximum => 255
   validates_format_of :name, :with => /^[\w -]*$/n
