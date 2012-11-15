@@ -80,10 +80,11 @@ class PoolFamily < ActiveRecord::Base
     subtree += instances if (role.nil? or role.privilege_target_match(Instance))
     subtree += catalogs if (role.nil? or role.privilege_target_match(Deployable))
     subtree += deployables if (role.nil? or role.privilege_target_match(Deployable))
+    subtree += base_images if (role.nil? or role.privilege_target_match(Tim::BaseImage))
     subtree
   end
   def self.additional_privilege_target_types
-    [Pool, Quota]
+    [Pool, Quota, Tim::BaseImage]
   end
 
   def check_pools!
