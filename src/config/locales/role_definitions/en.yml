@@ -49,3 +49,6 @@ en:
       base_image:
         owner: Image Owner
         user: Image User
+      template:
+        owner: Template Owner
+        user: Template User

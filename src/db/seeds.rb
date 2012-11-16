@@ -42,6 +42,9 @@ roles =
     Tim::BaseImage =>
      {"tim.base_image.user"         => [false, {Tim::BaseImage  => [VIEW,USE]}],
       "tim.base_image.owner"        => [true,  {Tim::BaseImage  => [VIEW,USE,MOD,    VPRM,GPRM]}]},
+    Tim::Template =>
+     {"tim.template.user"           => [false, {Tim::Template   => [VIEW,USE]}],
+      "tim.template.owner"          => [true,  {Tim::Template   => [VIEW,USE,MOD,    VPRM,GPRM]}]},
    PoolFamily =>
      {"pool_family.user"            => [false, {PoolFamily      => [VIEW]}],
       "pool_family.image.admin"     => [false, {PoolFamily      => [VIEW,USE],
@@ -49,6 +52,7 @@ roles =
                                                 Catalog         => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Deployable      => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Tim::BaseImage  => [VIEW,USE,MOD,CRE,VPRM,GPRM],
+                                                Tim::Template   => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Quota           => [VIEW]}],
       "pool_family.admin"           => [true,  {PoolFamily      => [VIEW,USE,MOD,    VPRM,GPRM],
                                                 Pool            => [VIEW,    MOD,CRE,VPRM,GPRM],
@@ -57,6 +61,7 @@ roles =
                                                 Catalog         => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Deployable      => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Tim::BaseImage  => [VIEW,USE,MOD,CRE,VPRM,GPRM],
+                                                Tim::Template   => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Quota           => [VIEW]}]},
    Pool =>
      {"pool.user"                   => [false, {Pool            => [VIEW],
@@ -119,6 +124,7 @@ roles =
                                                 Catalog         => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Deployable      => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Tim::BaseImage  => [VIEW,USE,MOD,CRE,VPRM,GPRM],
+                                                Tim::Template   => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 ProviderAccount => [VIEW,USE]}],
       "base.admin"                  => [false, {Provider        => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 ProviderAccount => [VIEW,USE,MOD,CRE,VPRM,GPRM],
@@ -133,6 +139,7 @@ roles =
                                                 Catalog         => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Deployable      => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 Tim::BaseImage  => [VIEW,USE,MOD,CRE,VPRM,GPRM],
+                                                Tim::Template   => [VIEW,USE,MOD,CRE,VPRM,GPRM],
                                                 BasePermissionObject    => [ MOD,    VPRM,GPRM]}]}}
 Role.transaction do
   roles.each do |role_scope, scoped_hash|

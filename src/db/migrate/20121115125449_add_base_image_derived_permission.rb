@@ -19,6 +19,8 @@ class AddBaseImageDerivedPermission < ActiveRecord::Migration
       [VIEW, USE, MOD, CRE, VPRM, GPRM].each do |action|
         Privilege.create!(:role => role, :target_type => Tim::BaseImage.name,
                           :action => action)
+        Privilege.create!(:role => role, :target_type => Tim::Template.name,
+                          :action => action)
       end
     end
   end
@@ -27,6 +29,9 @@ class AddBaseImageDerivedPermission < ActiveRecord::Migration
     ROLES.each do |role_name|
       role = Role.find_by_name(role_name)
       next unless role
+      role.privileges.where(:target_type => Tim::Template.name).each do |priv|
+        priv.destroy
+      end
       role.privileges.where(:target_type => Tim::BaseImage.name).each do |priv|
         priv.destroy
       end

@@ -56,6 +56,7 @@ class PoolFamily < ActiveRecord::Base
   has_many :instances
   has_many :deployments
   has_many :base_images
+  has_many :templates
 
   validates_length_of :name, :maximum => 255
   validates_format_of :name, :with => /^[\w -]*$/n
@@ -81,10 +82,11 @@ class PoolFamily < ActiveRecord::Base
     subtree += catalogs if (role.nil? or role.privilege_target_match(Deployable))
     subtree += deployables if (role.nil? or role.privilege_target_match(Deployable))
     subtree += base_images if (role.nil? or role.privilege_target_match(Tim::BaseImage))
+    subtree += templates if (role.nil? or role.privilege_target_match(Tim::Template))
     subtree
   end
   def self.additional_privilege_target_types
-    [Pool, Quota, Tim::BaseImage]
+    [Pool, Quota, Tim::BaseImage, Tim::Template]
   end
 
   def check_pools!
