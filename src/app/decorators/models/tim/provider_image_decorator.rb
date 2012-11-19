@@ -1,12 +1,7 @@
 Tim::ProviderImage.class_eval do
   def self.find_by_images(images)
-    images.map do |img|
-      img.image_versions.map do |ver|
-        ver.target_images.map do |timg|
-          timg.provider_images
-        end
-      end
-    end.flatten
+    ProviderImage.joins(:target_image => :image_version).
+      where(:tim_image_versions => {:base_image_id => [images.map(&:id)]})
   end
 
   def base_image
