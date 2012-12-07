@@ -41,7 +41,7 @@ Tim::BaseImagesController.class_eval do
       flash[:notice] = "Successfully created Base Image"
     else
       set_new_form_variables
-      flash[:error] = @base_image.errors.full_messages
+      flash.now[:error] = @base_image.errors.full_messages
     end
     respond_with @base_image
   end
