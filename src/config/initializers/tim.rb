@@ -28,5 +28,6 @@ Rails.application.config.to_prepare do
     Dir[p.join('app', 'decorators', '**', '*_decorator.rb')]
   }.flatten.uniq.each do |decorator|
     Rails.application.config.cache_classes ? require(decorator) : load(decorator)
+    require "/home/jprovazn/devel/tim/app/patches/rails/active_record/autosave_association.rb"
   end
 end
