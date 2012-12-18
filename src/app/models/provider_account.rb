@@ -227,6 +227,18 @@ class ProviderAccount < ActiveRecord::Base
         :value => c.value }
     end
 
+    # FIXME: this is only hotfix
+    # for openstack we keep username and tenant in username field because of
+    # deltacloud, imagefactory expects separate fields
+    if provider.provider_type.deltacloud_driver == 'openstack' &&
+      userhash = label_value_pairs.find {|i| i[:label] == 'username'}
+
+      username, tenant = userhash[:value].split('+')
+      userhash[:value] = username
+      label_value_pairs << { :label => 'strategy', :value => 'keystone' }
+      label_value_pairs << { :label => 'tenant', :value => tenant }
+    end
+
     # The list is ordered by labels. That way we guarantee that the resulting
     # XML is always the same which makes it easier to verify in tests.
     label_value_pairs.sort { |a, b| a[:label] <=> b[:label] }
