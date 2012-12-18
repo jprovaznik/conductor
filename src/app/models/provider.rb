@@ -249,6 +249,20 @@ class Provider < ActiveRecord::Base
 
   end
 
+  def imagefactory_info
+    if provider_type.deltacloud_driver == 'openstack'
+      uri = URI.parse(deltacloud_provider)
+      {
+        'glance-host' => uri.host,
+        'glance-port' => uri.port,
+      }.to_json
+    elsif ['rhevm', 'vsphere'].include?(provider_type.deltacloud_driver)
+      File.read("/etc/imagefactory/#{provider_type.deltacloud_driver}.json")
+    else
+      {}.to_json
+    end
+  end
+
   protected
 
   def stop_instances(user)
